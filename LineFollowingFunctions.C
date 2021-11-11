@@ -1,15 +1,15 @@
 //----------------------------------------------------------------------------------------------------
 // Name:lineFollowForDistance
 //----------------------------------------------------------------------------------------------------
-// Description: computes the midpoint, set motor encoder to 0, compute the rotations to move, compute 
+// Description: computes the midpoint, set motor encoder to 0, compute the rotations to move, compute
 // degreesToMove, move forward until the encoder value is greater then the degreesToMove. We compute
 // the correction factor, detect what edge to be on, then turn off the drive motors and set brake mode.
 //----------------------------------------------------------------------------------------------------
-//Inputs:     speed   		float   		speed we go at 
+//Inputs:     speed   		float   		speed we go at
 //            inchesToMove  	float   		inches we want to move
-//	      colorSenorToUse	string			use variable leftSensor or rightSensor to pass in. 
-//   	      edgeToUse		string			use variable leftEdge or rightEdge to pass in.  
-//            brakeMode   	bool   			coast or brake  
+//	      colorSenorToUse	string			use variable leftSensor or rightSensor to pass in.
+//   	      edgeToUse		string			use variable leftEdge or rightEdge to pass in.
+//            brakeMode   	bool   			coast or brake
 //----------------------------------------------------------------------------------------------------
 void lineFollowForDistance(float speed, float inchesToMove,  string colorSensorToUse, string edgeToUse, bool brakeMode)
 
@@ -43,10 +43,10 @@ void lineFollowForDistance(float speed, float inchesToMove,  string colorSensorT
 	degreesToMove = rotations * 360;
 
 	// move forward until the encoder value is greater then the degrees to move
-	while (abs(getLeftMotorEncoder()) <= degreesToMove)
+	while (getLeftMotorEncoder() >= -degreesToMove)
 	{
 
-		if (colorSensorToUse == "leftSensor")				// Use the left color sensor
+		if (colorSensorToUse = "leftSensor")				// Use the left color sensor
 		{
 			colorSensorReading = getColorReflected(leftColor);
 		}
@@ -95,15 +95,15 @@ void lineFollowForDistance(float speed, float inchesToMove,  string colorSensorT
 //----------------------------------------------------------------------------------------------------
 // Name: lineFollowUntilLine
 //----------------------------------------------------------------------------------------------------
-// Description:   Computes Midpoint, sets the gain to increase when we go faster, computes whether we 
+// Description:   Computes Midpoint, sets the gain to increase when we go faster, computes whether we
 // are stopping on white or black, we find the sensor we are not using to line follow, detect what edge
-// we are on, set the new drive speeds, and turn off the motors and set brake mode. 
+// we are on, set the new drive speeds, and turn off the motors and set brake mode.
 //----------------------------------------------------------------------------------------------------
 //Inputs:
 //    speed 		Float 		speed we go at
-//    colorSenorToUse	string		use variable -  leftSensor or rightSensor  
-//    edgeToUse		string		use variable - leftEdge or rightEdge 
-//    colorToLookFor	string  	use variable - white or black 
+//    colorSenorToUse	string		use variable -  leftSensor or rightSensor
+//    edgeToUse		string		use variable - leftEdge or rightEdge
+//    colorToLookFor	string  	use variable - white or black
 //    brakeMode 	Bool    	coast or brake
 //----------------------------------------------------------------------------------------------------
 void lineFollowUntilLine(float speed, string colorSensorToUse, string edgeToUse, string colorToLookFor, bool brakeMode)

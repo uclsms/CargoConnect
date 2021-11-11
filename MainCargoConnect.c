@@ -59,19 +59,18 @@ task main()
 	resetGyro(gyro);
 	sleep(100);
 
-	// Drive straight using the gyro to get on top of the line to follow
-	driveStraightGyroDistance(50, 17, 0, false);
-
-	// Line follow for distance
-	lineFollowForDistance(15, 15.5, rightSensor, rightEdge, false);
-
-	// LIne follow until we see the white line
-	lineFollowUntilLine(10, rightSensor, rightEdge, white, false);
-
-	// Line follow until we see the black line
-	lineFollowUntilLine(10, rightSensor, rightEdge, black, true);
+	//driveStraightGyroDistance(40,14,0,true);
 
 
+	//sideTurnUsingGyro(30,45,false);
+
+//driveStraightGyroDistance(30,12,0,true);
+lineFollowForDistance(30,5,rightSensor,rightEdge,false);
+
+//
+
+setMotorSpeed(leftDrive, 0);
+setMotorSpeed(rightDrive, 0);
 
 
 }
