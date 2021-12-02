@@ -37,7 +37,7 @@ void lineFollowForDistance(float speed, float inchesToMove,  string colorSensorT
 	resetMotorEncoder(rightDrive);
 
 	// Compute the rotations to move
-	rotations = inchesToMove * 7.717922162;
+	rotations = inchesToMove / 7.717922162;
 
 	// compute degrees wheel needs to move
 	degreesToMove = rotations * 360;
@@ -63,7 +63,7 @@ void lineFollowForDistance(float speed, float inchesToMove,  string colorSensorT
 		correctionFactor = error * gain;
 
 		// detecting what edge you are on
-		if (edgeToUse == "leftEdge")		// 1 = left edge
+		if (edgeToUse == "leftEdge")		//  left edge
 		{
 			speedLeft = speed - correctionFactor;
 			speedRight = speed + correctionFactor;
