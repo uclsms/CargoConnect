@@ -41,22 +41,23 @@ void driveStraightGyroDistance(float speed, float inchesToMove, float direction,
 	{
 
 		// Setpoint that we want to go in - actual current reading
-		error = direction + getGyroDegrees(gyro);
+		error = direction - getGyroDegrees(gyro);
 
 		// Compute the correction factor
 		correctionFactor = error * gain;
 
-		speedLeft = speed + correctionFactor;
-		speedRight = speed - correctionFactor;
+		speedLeft = speed - correctionFactor;
+		speedRight = speed + correctionFactor;
 
 		setMotorSpeed(leftDrive, speedLeft);
 		setMotorSpeed(rightDrive, speedRight);
 	}
 
 
+	// Stop Motors
 	turnOffDriveMotors();
 
-
+	// Apply brakes if selected
 	setBrakeMode(brakeMode);
 
 }
@@ -84,7 +85,7 @@ void centerTurnUsingGyro(float speed, float degreesToTurn,  bool brakeMode)
 	momentum = (speed/5);
 
 	// Get the starting gyroscope reading
-	gyroStartReading = -getGyroDegrees(gyro);
+	gyroStartReading = getGyroDegrees(gyro);
 
 
 
@@ -93,49 +94,38 @@ void centerTurnUsingGyro(float speed, float degreesToTurn,  bool brakeMode)
 
 		// Compute the end reading
 		gyroEndReading = gyroStartReading + degreesToTurn - momentum;
-
-
 		setMotorSpeed(leftDrive, speed);
 		setMotorSpeed(rightDrive, -speed);
 
-		while (-getGyroDegrees(gyro) < gyroEndReading)
+		while (getGyroDegrees(gyro) < gyroEndReading)
 		{
 
 		}
-
-
-		turnOffDriveMotors();
-
-
-		setBrakeMode(brakeMode);
 
 
 	}
 	else																				// Turning to the left
 	{
-
-			// Compute the end reading
+		// Compute the end reading
 		gyroEndReading = gyroStartReading + degreesToTurn + momentum;
-
 
 		setMotorSpeed(leftDrive, -speed);
 		setMotorSpeed(rightDrive, speed);
 
-		while (-getGyroDegrees(gyro) > gyroEndReading)
+		while (getGyroDegrees(gyro) > gyroEndReading)
 		{
 
 		}
 
 
-		turnOffDriveMotors();
-
-
-		setBrakeMode(brakeMode);
-
-
-
 	}
 
+
+	// Stop Motors
+	turnOffDriveMotors();
+
+	// Apply brakes if selected
+	setBrakeMode(brakeMode);
 
 
 }
@@ -159,53 +149,50 @@ void sideTurnUsingGyro(float speed, float degreesToTurn,  bool brakeMode)
 	float gyroEndReading;							// The value we want to end the while statement
 	float momentum;
 
-	momentum = (speed/5);
+	momentum = (speed/4);
 
 	// Get the starting gyroscope reading
-	gyroStartReading = -getGyroDegrees(gyro);
+	gyroStartReading = getGyroDegrees(gyro);
 
-	// Compute the end reading
 
-// the constant 10 will change with speed because momentum increases with speed
 
 	if (degreesToTurn > 0)												// Turning to the right
 	{
-		gyroEndReading = abs(gyroStartReading) + degreesToTurn - 10; // If the gyro reads negative degrees, then the end reading will be wrong, it will also be wrong if the degrees to turn
-	// is less than 0
+
+		// Compute the end reading
+		gyroEndReading = gyroStartReading + degreesToTurn - momentum;
+
 		setMotorSpeed(leftDrive, speed);
 		setMotorSpeed(rightDrive, 0);
 
-		while (-getGyroDegrees(gyro) < gyroEndReading)
+		while (getGyroDegrees(gyro) < gyroEndReading)
 		{
 
 		}
 
 
-		turnOffDriveMotors();
-
-
-		setBrakeMode(brakeMode);
-
-
 	}
-	else																// Turning to the left
+	else														// Turning to the left
 	{
-		gyroEndReading = abs(gyroStartReading) - degreesToTurn + 10;
+
+		// Compute the end reading
+		gyroEndReading = gyroStartReading + degreesToTurn + momentum;
 
 		setMotorSpeed(leftDrive, 0);
 		setMotorSpeed(rightDrive, speed);
 
-		while (-getGyroDegrees(gyro) > gyroEndReading)
+		while (getGyroDegrees(gyro) > gyroEndReading)
 		{
 
 		}
 
+
 	}
 
-
+	// Stop Motors
 	turnOffDriveMotors();
 
-
+	// Apply brakes if selected
 	setBrakeMode(brakeMode);
 
 

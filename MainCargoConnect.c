@@ -24,6 +24,7 @@ string rightSensor;
 string leftEdge;
 string rightEdge;
 string black;
+string grey;
 string white;
 
 
@@ -33,44 +34,91 @@ string white;
 #include "EncoderDriveFunctions.C"
 #include "EncoderTurnFunctions.C"
 #include "LineFollowingFunctions.C"
+#include "Missions.C"
+#include "SetupGlobalVariables.C"
+
+
+void displayMissionName(int missionIndex)
+{
+	// 0 = North Wall Mission
+	// 1 = Center Mission
+	// 2 = South Wall Mission
+	// 3 = East Wall Mission
+	// 4 = End Mission
+
+
+	if (missionIndex == 0) displayCenteredBigTextLine(2, "Blue Box" );
+	if (missionIndex == 1) displayCenteredBigTextLine(2, "North Wall" );
+	if (missionIndex == 2) displayCenteredBigTextLine(2, "Center" );
+	if (missionIndex == 3) displayCenteredBigTextLine(2, "South Wall" );
+	if (missionIndex == 4) displayCenteredBigTextLine(2, "East Wall" );
+	if (missionIndex == 5) displayCenteredBigTextLine(2, "End" );
+	if (missionIndex == 6) displayCenteredBigTextLine(2, "Clean Wheels" );
+
+
+}
 
 
 task main()
 {
 
-	// Setup parameters that may be different on different robots
-	wheelDiameterInMM = 62.4;										// This is on the side of every lego wheel.
-	widthBetweenWheelsInMM = 96.72; 						// Width between wheels in mm.  Each lift arm width is 7.44mm wide
-	reflectedLightIntensityOnBlack = 10;				// Color sensor reading when reading black.
-	reflectedLightIntensityOnWhite = 100; 			// Color Sensor reading when reading white.
-	forwardMotorMovementIsPositive = false;  		// Do the encoders go posiitive when moving forward. (False = negative)
+	// Setup Global Variables
+	setupGlobalVariables();
 
-
-	// Setup the strings to pass in to the functions because we can't pass strings, but can pass variables.
-	leftSensor = "leftSensor";
-	rightSensor = "rightSensor";
-	leftEdge = "leftEdge";
-	rightEdge = "rightEdge";
-	black = "black";
-	white = "white";
-
-
-	// Reset the gyroscoe and wait 100ms to settle
+	// Reset the gyro when the program starts
 	resetGyro(gyro);
-	sleep(100);
-
-	//driveStraightGyroDistance(40,14,0,true);
 
 
-	//sideTurnUsingGyro(30,45,false);
+	// Setting up initial values and display
+	int missionIndex;
+	missionIndex = 0;
+	displayMissionName(missionIndex);
 
-//driveStraightGyroDistance(30,12,0,true);
-lineFollowForDistance(30,5,rightSensor,rightEdge,false);
+	// Set the volumne to low
+	setSoundVolume(10);
 
-//
+	//Loop to run selector program
+	while(true)                   // infinite loop:
+	{
 
-setMotorSpeed(leftDrive, 0);
-setMotorSpeed(rightDrive, 0);
+			//While the left button (5) is pressed
+		if ((getButtonPress(buttonLeft) == 1) && missionIndex > 0)
+		{
 
+			missionIndex = missionIndex - 1;
+			displayMissionName(missionIndex);
+			playSound(soundBlip);
+			sleep (250);
+
+		}
+		else if(getButtonPress(buttonRight) == 1 && missionIndex < 6)
+		{
+
+			missionIndex = missionIndex + 1;
+			displayMissionName(missionIndex);
+			playSound(soundBlip);
+			sleep (250);
+
+		}
+
+		// Display The Gyro
+		displayCenteredBigTextLine(6, "Gyro: %d", getGyroDegrees(gyro) );
+
+
+
+		if (getButtonPress(buttonEnter) == 1)
+		{
+
+				if (missionIndex == 0) blueBoxMission();
+				if (missionIndex == 1) northWallMission();
+				if (missionIndex == 2) centerMission();
+				if (missionIndex == 3) southWallMission();
+				if (missionIndex == 4) eastWallMission();
+				if (missionIndex == 5) endMission();
+				if (missionIndex == 6) cleanWheels();
+
+		}
+
+	}
 
 }

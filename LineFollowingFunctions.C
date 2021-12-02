@@ -51,10 +51,10 @@ void lineFollowForDistance(float speed, float inchesToMove,  string colorSensorT
 	degreesToMove = rotations * 360;
 
 	// move forward until the encoder value is greater then the degrees to move
-	while (getLeftMotorEncoder() >= -degreesToMove)
+	while (abs(getLeftMotorEncoder()) <= degreesToMove)
 	{
 
-		if (colorSensorToUse = "leftSensor")				// Use the left color sensor
+		if (colorSensorToUse == "leftSensor")				// Use the left color sensor
 		{
 			colorSensorReading = getColorReflected(leftColor);
 		}
