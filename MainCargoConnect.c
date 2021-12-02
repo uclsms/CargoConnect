@@ -1,4 +1,4 @@
-#pragma config(Sensor, S1,     leftColor,      sensorEV3_Color)
+ #pragma config(Sensor, S1,     leftColor,      sensorEV3_Color)
 #pragma config(Sensor, S2,     attachmentColor, sensorEV3_Color)
 #pragma config(Sensor, S3,     gyro,           sensorEV3_Gyro)
 #pragma config(Sensor, S4,     rightColor,     sensorEV3_Color)
