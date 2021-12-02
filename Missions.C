@@ -1,4 +1,5 @@
 
+
 // This mission does the stuff in the center of the board  (Truck drop off, slip roads down)
 void centerMission()
 {
@@ -20,6 +21,41 @@ void centerMission()
 // This does the missions on the south wall.  (Door Deliver, Package Drop off)
 void southWallMission()
 {
+	driveStraightGyroDistance(20,38,0,false);
+
+	centerTurnUsingGyro(20,45,false);
+
+	driveStraightGyroDistance(20,6,0,false);
+
+	centerTurnUsingGyro(20,-35,false);
+
+	driveStraightGyroDistance(20,12,0,false);
+
+	centerTurnUsingGyro(20,-45,false);
+
+	moveLeftAttachmentMotorDegrees(20,-200,false);
+
+	driveStraightGyroDistance(20,-3,0,false);
+
+	centerTurnUsingGyro(20,45,false);
+
+	driveStraightGyroDistance(20,-10,0,false);
+
+	centerTurnUsingGyro(20,-45,false);
+
+	driveStraightGyroDistance(20,-40,0,false);
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -28,7 +64,11 @@ void southWallMission()
 // This does the missions on the east wall (Hellicopter, Cargo Ship)
 void eastWallMission()
 {
-
+driveStraightGyroDistance(30,24,0,true);
+centerTurnUsingGyro(25,90,true);
+driveEncoderDistance(50,50,20,true);
+lineFollowForDistance(30,5,rightSensor,rightEdge,true);
+lineFollowUntilLine(20,leftSensor,leftEdge,white,true);
 
 
 }
