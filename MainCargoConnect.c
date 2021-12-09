@@ -1,4 +1,4 @@
- #pragma config(Sensor, S1,     leftColor,      sensorEV3_Color)
+#pragma config(Sensor, S1,     leftColor,      sensorEV3_Color)
 #pragma config(Sensor, S2,     attachmentColor, sensorEV3_Color)
 #pragma config(Sensor, S3,     gyro,           sensorEV3_Gyro)
 #pragma config(Sensor, S4,     rightColor,     sensorEV3_Color)
@@ -81,7 +81,7 @@ task main()
 	while(true)                   // infinite loop:
 	{
 
-			//While the left button (5) is pressed
+		//While the left button (5) is pressed
 		if ((getButtonPress(buttonLeft) == 1) && missionIndex > 0)
 		{
 
@@ -109,13 +109,13 @@ task main()
 		if (getButtonPress(buttonEnter) == 1)
 		{
 
-				if (missionIndex == 0) blueBoxMission();
-				if (missionIndex == 1) northWallMission();
-				if (missionIndex == 2) centerMission();
-				if (missionIndex == 3) southWallMission();
-				if (missionIndex == 4) eastWallMission();
-				if (missionIndex == 5) endMission();
-				if (missionIndex == 6) cleanWheels();
+			if (missionIndex == 0) blueBoxMission();
+			if (missionIndex == 1) northWallMission();
+			if (missionIndex == 2) centerMission();
+			if (missionIndex == 3) southWallMission();
+			if (missionIndex == 4) eastWallMission();
+			if (missionIndex == 5) endMission();
+			if (missionIndex == 6) cleanWheels();
 
 		}
 
