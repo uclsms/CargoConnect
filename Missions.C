@@ -20,6 +20,7 @@ void centerMission()
 
 // This does the missions on the south wall.  (Door Deliver, Package Drop off)
 /*void southWallMission()
+
 {
 	driveStraightGyroDistance(20,38,0,false);
 
@@ -66,11 +67,45 @@ void centerMission()
 // South Wall Pt2 (gyro was drifting to much)
 void southWallMission ()
 {
-  driveEncoderDistance (30,30,30,true);
-
-	//sideTurnEncoder(30, 45, true);
+ 	// go forward 43 inches
+	driveEncoderDistance (30,30,43,true);
 
   sideTurnUsingGyro(30,45,true);
+
+  driveEncoderDistance(30,30,10,true);
+
+  sideTurnUsingGyro(30,-45,true);
+
+  moveLeftAttachmentMotorDegrees(10,-200,false);
+
+  sideTurnUsingGyro(20,20,true);
+
+  driveEncoderDistance(-30,-30,5,true);
+
+
+//  driveEncoderDistance(30,30,10,true);
+
+//  sideTurnUsingGyro(30,-45,true);
+
+//  driveEncoderDistance(30,30,40,true);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
